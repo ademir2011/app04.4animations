@@ -1,3 +1,4 @@
+import 'package:app04shop/components/app_drawer.dart';
 import 'package:app04shop/components/badge.dart';
 import 'package:app04shop/components/product_grid.dart';
 import 'package:app04shop/models/cart.dart';
@@ -63,6 +64,7 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
         ],
       ),
       body: ProductGrid(_showFavoriteOnly),
+      drawer: const AppDrawer(),
     );
   }
 }
