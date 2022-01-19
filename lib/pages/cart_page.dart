@@ -1,5 +1,6 @@
 import 'package:app04shop/components/cart_item.dart';
 import 'package:app04shop/models/cart.dart';
+import 'package:app04shop/models/cart_item.dart';
 import 'package:app04shop/models/order_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,18 +41,7 @@ class CartPage extends StatelessWidget {
                     ),
                   ),
                   Spacer(),
-                  TextButton(
-                    onPressed: () {
-                      Provider.of<OrderList>(context, listen: false).addOrder(cart);
-                      cart.clear();
-                    },
-                    child: Text('COMPRAR'),
-                    style: TextButton.styleFrom(
-                      textStyle: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                      ),
-                    ),
-                  ),
+                  CartButton(cart: cart),
                 ],
               ),
             ),
@@ -65,5 +55,44 @@ class CartPage extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class CartButton extends StatefulWidget {
+  const CartButton({
+    Key? key,
+    required this.cart,
+  }) : super(key: key);
+
+  final Cart cart;
+
+  @override
+  State<CartButton> createState() => _CartButtonState();
+}
+
+class _CartButtonState extends State<CartButton> {
+  bool _isLoading = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return _isLoading
+        ? CircularProgressIndicator()
+        : TextButton(
+            onPressed: CartItem == 0
+                ? null
+                : () async {
+                    setState(() => _isLoading = true);
+                    await Provider.of<OrderList>(context, listen: false).addOrder(widget.cart);
+
+                    widget.cart.clear();
+                    setState(() => _isLoading = false);
+                  },
+            child: Text('COMPRAR'),
+            style: TextButton.styleFrom(
+              textStyle: TextStyle(
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+          );
   }
 }
