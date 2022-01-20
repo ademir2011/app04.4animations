@@ -1,6 +1,7 @@
 import 'package:app04shop/models/cart.dart';
 import 'package:app04shop/models/order_list.dart';
 import 'package:app04shop/models/product_list.dart';
+import 'package:app04shop/pages/auth_page.dart';
 import 'package:app04shop/pages/cart_page.dart';
 import 'package:app04shop/pages/orders_page.dart';
 import 'package:app04shop/pages/product_detail_page.dart';
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         routes: {
+          AppRoutes.AUTH: (ctx) => const AuthPage(),
           AppRoutes.HOME: (ctx) => const ProductsOverviewPage(),
           AppRoutes.PRODUCT_DETAUL: (ctx) => const ProductDetailPage(),
           AppRoutes.CART: (ctx) => const CartPage(),
