@@ -12,6 +12,7 @@ import 'package:app04shop/pages/product_form_page.dart';
 import 'package:app04shop/pages/products_page.dart';
 import 'package:app04shop/pages/products_overview_page.dart';
 import 'package:app04shop/utils/app_routes.dart';
+import 'package:app04shop/utils/custom_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -60,6 +61,12 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.purple,
           accentColor: Colors.deepOrange,
           fontFamily: 'Lato',
+          pageTransitionsTheme: PageTransitionsTheme(
+            builders: {
+              TargetPlatform.iOS: CustomPageTransitionsBuilder(),
+              TargetPlatform.android: CustomPageTransitionsBuilder(),
+            },
+          ),
         ),
         debugShowCheckedModeBanner: false,
         routes: {
